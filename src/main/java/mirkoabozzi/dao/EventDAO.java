@@ -3,6 +3,7 @@ package mirkoabozzi.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import mirkoabozzi.entities.Event;
+import mirkoabozzi.exceptions.NotFoundException;
 
 public class EventDAO {
 
@@ -17,6 +18,13 @@ public class EventDAO {
         transaction.begin();
         em.persist(event);
         transaction.commit();
-        System.out.println("Evento creato");
+        System.out.println("Evento " + event.getDescription() + " creato");
+    }
+
+
+    public Event getById(long eventId) {
+        Event found = em.find(Event.class, eventId);
+        if (found == null) throw new NotFoundException(eventId);
+        else return found;
     }
 }
