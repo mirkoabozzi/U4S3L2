@@ -31,14 +31,12 @@ public class Application {
         ed.save(piscina);
         ed.save(tracking);
 
-
         try {
             Event event = ed.getById(52);
             System.out.println(event);
         } catch (NotFoundException ex) {
             System.out.println(ex.getMessage());
         }
-
 
         try {
             ed.delete(54);
