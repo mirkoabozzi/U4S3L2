@@ -23,8 +23,18 @@ public class EventDAO {
 
 
     public Event getById(long eventId) {
-        Event found = em.find(Event.class, eventId);
-        if (found == null) throw new NotFoundException(eventId);
-        else return found;
+        Event eventFound = em.find(Event.class, eventId);
+        if (eventFound == null) throw new NotFoundException(eventId);
+        else return eventFound;
+    }
+
+    public void delete(long eventId) {
+        Event eventFound = this.getById(eventId);
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.remove(eventFound);
+        transaction.commit();
+
+        System.out.println("Evento " + eventFound.getTitle() + " eliminato");
     }
 }

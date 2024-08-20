@@ -41,5 +41,11 @@ public class Application {
             System.out.println(ex.getMessage());
         }
 
+
+        try {
+            ed.delete(54);
+        } catch (NotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }
